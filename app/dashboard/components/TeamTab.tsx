@@ -6,6 +6,7 @@ import {
 import { User } from '@/types/user';
 
 interface TeamTabProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     members: any[]; // Using any for now to be flexible with the mix of User and ProjectMember, ideally should act on a unified type
 }
 

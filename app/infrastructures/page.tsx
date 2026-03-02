@@ -31,6 +31,7 @@ import {
 
 const statusConfig: Record<
     InfrastructureStatus,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     { label: string; color: "success" | "warning" | "failure"; icon: any }
 > = {
     AVAILABLE: {

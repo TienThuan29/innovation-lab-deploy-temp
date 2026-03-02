@@ -118,6 +118,7 @@ export default function SupervisorDashboard({ params }: { params: Promise<{ labI
     // Publications
     const publications = getPublicationsByLab(lab.id).map(p => ({
         ...p,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         authors: (p as any).authors || ["Lab Member", "Collaborator"] // Ensure authors exist, suppressing lint
     }));
 
@@ -137,6 +138,7 @@ export default function SupervisorDashboard({ params }: { params: Promise<{ labI
     // Let's check existing imports.
     // I imported `mockPartners` from `@/mocks/partners`.
     // I'll filter it.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const labPartners = (mockPartners as any[]).filter(p => p.labId === currentLabId); // Type casting to avoid conflict if any
 
     // Director Info
@@ -296,6 +298,7 @@ export default function SupervisorDashboard({ params }: { params: Promise<{ labI
                         ].map((tab) => (
                             <button
                                 key={tab.id}
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 onClick={() => setActiveTab(tab.id as any)}
                                 className={`
                                     whitespace-nowrap py-4 px-1 inline-flex items-center gap-2 border-b-2 font-medium text-sm transition-all
@@ -328,7 +331,7 @@ export default function SupervisorDashboard({ params }: { params: Promise<{ labI
                             publicationsData={publicationsTrend}
                             fundingSourceData={fundingSourceData}
                             latestPublications={latestPublications}
-                            latestPublications={latestPublications}
+                            // latestPublications={latestPublications}
                             recentActivities={labActivities.slice(0, 3)}
                             allPublications={publications}
                             allApplications={labApplications}

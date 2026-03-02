@@ -18,6 +18,7 @@ import {
   type SessionData,
 } from "@/utils/session";
 import { useToast } from "@/hooks/useToast";
+import { mockLabs } from "@/mocks/labs";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -27,6 +28,10 @@ export default function Sidebar() {
   const { showSuccess } = useToast();
   const isSuperDirector = pathname?.startsWith("/superdirector");
   const isSessionSuperDirector = session?.role === "SUPER_DIRECTOR";
+  const labs = mockLabs.map((lab) => ({
+    href: `/dashboard/supervisor/${lab.id}`,
+    label: lab.shortName || lab.name,
+  }));
 
   useEffect(() => {
     setSession(getStoredSession());
@@ -41,7 +46,6 @@ export default function Sidebar() {
     showSuccess("Logged out");
     router.push("/login");
   };
-
 
   const itemBase =
     "group flex items-center px-4 py-2.5 text-sm font-medium transition-colors duration-200 rounded-md mx-2";
@@ -114,10 +118,11 @@ export default function Sidebar() {
                     <li key={lab.id}>
                       <Link
                         href={`/dashboard/supervisor/${lab.id}`}
-                        className={`${itemBase} ${isActive(`/dashboard/supervisor/${lab.id}`)
-                          ? "bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300"
-                          : "text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-100"
-                          }`}
+                        className={`${itemBase} ${
+                          isActive(`/dashboard/supervisor/${lab.id}`)
+                            ? "bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300"
+                            : "text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-100"
+                        }`}
                       >
                         <div className="mr-2 w-6 text-center font-semibold">
                           {index + 1}.

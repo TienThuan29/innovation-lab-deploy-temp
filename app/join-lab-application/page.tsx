@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   Button,
@@ -11,17 +11,15 @@ import {
   Progress,
   Badge,
 } from "flowbite-react";
-import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/header";
 import { mockLabs } from "@/mocks/labs";
 import { TargetRole } from "@/types/application";
 import { useToast } from "@/contexts/ToastContext";
-import { ST } from "next/dist/shared/lib/utils";
 
 type StepKey = 0 | 1 | 2 | 3;
 
-export default function JoinLabApplicationPage() {
+function JoinLabApplicationContent() {
   const toast = useToast();
   const searchParams = useSearchParams();
   const [step, setStep] = useState<StepKey>(0);
@@ -737,5 +735,19 @@ export default function JoinLabApplicationPage() {
         </div>
       </main>
     </>
+  );
+}
+
+export default function JoinLabApplicationPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <JoinLabApplicationContent />
+    </Suspense>
   );
 }
