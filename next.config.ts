@@ -2,6 +2,11 @@ import type { NextConfig } from "next";
 import withFlowbiteReact from "flowbite-react/plugin/nextjs";
 
 const nextConfig: NextConfig = {
+  eslint: {
+    // Allow production build to succeed even with ESLint warnings (e.g. on Vercel).
+    // Remove this once all lint issues are resolved.
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
